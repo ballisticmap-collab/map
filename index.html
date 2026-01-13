@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ballistic Map Board</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="toast" class="toast" aria-live="polite"></div>
+  <header class="topbar">
+    <div class="leftRow">
+      <select id="mapSelect" class="select"></select>
+      <button id="shareModeBtn" class="btn primary">共有</button>
+      <button id="copyLinkBtn" class="btn" disabled>共有URLコピー</button>
+      <button id="clearPinsBtn" class="btn">ピン全消し</button>
+      <button id="clearLinesBtn" class="btn">線全消し</button>
+    </div>
+    <div class="rightRow">
+      <span id="statusBadge" class="badge">通常</span>
+      <span class="room">room: <code id="roomCode">-</code></span>
+    </div>
+  </header>
+  <div class="main">
+    <aside class="leftPanel">
+      <div class="sectionTitle">モード</div>
+      <div class="modeRow" id="modeRow">
+        <button class="pill" data-mode="pen">ペン</button>
+        <button class="pill" data-mode="erase">消す</button>
+      </div>
+      <div class="sectionTitle">大きさ</div>
+      <div class="sizeControl">
+        <input type="range" id="sizeSlider" min="30" max="120" value="54" step="5" />
+        <span id="sizeValue">54px</span>
+      </div>
+      <div class="sectionTitle">ガジェッロ</div>
+      <div id="itemGrid" class="itemGrid"></div>
+    </aside>
+    <main class="rightPanel">
+      <div class="mapWrap" id="mapWrap">
+        <img id="mapImg" class="mapImg" alt="map" />
+        <canvas id="drawCanvas" class="drawCanvas"></canvas>
+        <div id="pinLayer" class="pinLayer"></div>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
