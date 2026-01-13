@@ -192,7 +192,65 @@ body{
   inset:0;
   pointer-events:none;
 }
+/* 色切り替えボタン */
+.colorRow{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
 
+.colorPill{
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 7px 11px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.colorPill.blue{
+  border-color: rgba(122,162,255,.5);
+}
+
+.colorPill.blue.active{
+  background: rgba(122,162,255,.25);
+  border-color: rgba(122,162,255,.85);
+}
+
+.colorPill.red{
+  border-color: rgba(255,107,138,.5);
+}
+
+.colorPill.red.active{
+  background: rgba(255,107,138,.25);
+  border-color: rgba(255,107,138,.85);
+}
+
+/* ピンの色 */
+.pin.blue{
+  border-color: rgba(122,162,255,.6);
+  background: rgba(122,162,255,.15);
+}
+
+.pin.red{
+  border-color: rgba(255,107,138,.6);
+  background: rgba(255,107,138,.15);
+}
+
+/* スモークの色 */
+.pin.smoke.blue .smoke-circle{
+  background: rgba(122,162,255,0.85);
+  box-shadow: 0 0 30px rgba(122,162,255,0.6);
+}
+
+.pin.smoke.red .smoke-circle{
+  background: rgba(255,107,138,0.85);
+  box-shadow: 0 0 30px rgba(255,107,138,0.6);
+}
 .pin{
   position:absolute;
   transform: translate(-50%, -50%);
