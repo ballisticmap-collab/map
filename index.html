@@ -11,13 +11,13 @@
   <header class="topbar">
     <div class="leftRow">
       <select id="mapSelect" class="select"></select>
-      <button id="shareModeBtn" class="btn primary">共有</button>
+      <button id="shareModeBtn" class="btn primary">共有モード</button>
       <button id="copyLinkBtn" class="btn" disabled>共有URLコピー</button>
       <button id="clearPinsBtn" class="btn">ピン全消し</button>
       <button id="clearLinesBtn" class="btn">線全消し</button>
     </div>
     <div class="rightRow">
-      <span id="statusBadge" class="badge">通常</span>
+      <span id="statusBadge" class="badge">通常モード</span>
       <span class="room">room: <code id="roomCode">-</code></span>
     </div>
   </header>
@@ -28,12 +28,17 @@
         <button class="pill" data-mode="pen">ペン</button>
         <button class="pill" data-mode="erase">消す</button>
       </div>
+      <div class="sectionTitle">チーム色</div>
+      <div class="colorRow" id="colorRow">
+        <button class="colorPill blue active" data-color="blue">味方</button>
+        <button class="colorPill red" data-color="red">敵</button>
+      </div>
       <div class="sectionTitle">大きさ</div>
       <div class="sizeControl">
         <input type="range" id="sizeSlider" min="30" max="120" value="54" step="5" />
         <span id="sizeValue">54px</span>
       </div>
-      <div class="sectionTitle">ガジェッロ</div>
+      <div class="sectionTitle">アイテム</div>
       <div id="itemGrid" class="itemGrid"></div>
     </aside>
     <main class="rightPanel">
