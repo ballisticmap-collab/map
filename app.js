@@ -51,6 +51,7 @@ function showToast(msg, ms = 0){
 let mode = null; // null | pen | erase
 let selectedItemId = ITEMS[0]?.id ?? "g_grenade";
 let selectedPinSize = 54; // スライダーで選択されたサイズ
+let selectedColor = "blue"; // 追加：デフォルトは青（味方）
 let currentMapKey  = MAPS[0].key;
 // map zoom/pan（スマホピンチ用）
 let viewScale = 1;
@@ -222,6 +223,10 @@ function redrawPins(){
     el.className = "pin";
     el.dataset.pinId = id;
     
+    // 色のクラスを追加
+    const pinColor = data.color || "blue";
+    el.classList.add(pinColor);
+    
     // スモークの場合は専用クラスを追加
     if (data.type === "g_smoke") {
       el.classList.add("smoke");
@@ -353,7 +358,8 @@ async function addPin(type, x, y){
   }
   const data = {
     type, x, y,
-    size: selectedPinSize,  // スライダーの値を使用
+    size: selectedPinSize,
+    color: selectedColor,  // 追加：色情報を保存
     createdAt: Date.now()
   };
 
@@ -908,13 +914,26 @@ function initModes(){
       modeRow.querySelectorAll(".pill").forEach(x => x.classList.remove("active"));
       if(mode) btn.classList.add("active");
       if(mode === "erase"){
-        showToast("消すモード中：うごかｃたかったらかいじょｃロー",999999); // 実質ずっと表示
+        showToast("消すモード中：うごかｃたかったらかいじょｃロー",999999);
       }else{
-        // 消すモードを抜けたら消す
         if(toastEl){
           toastEl.classList.remove("show");
         }
       }
+    });
+  });
+}
+
+function initColorSelect(){
+  const colorRow = document.getElementById("colorRow");
+  
+  colorRow.querySelectorAll(".colorPill").forEach(btn => {
+    btn.addEventListener("click", () => {
+      selectedColor = btn.dataset.color;
+      
+      // activeクラスの切り替え
+      colorRow.querySelectorAll(".colorPill").forEach(x => x.classList.remove("active"));
+      btn.classList.add("active");
     });
   });
 }
@@ -951,9 +970,10 @@ function loadMapImage(){
   setStatus("通常", "normal");
   copyLinkBtn.disabled = true;
 
-  initMapSelect();
+initMapSelect();
   initItems();
   initModes();
+  initColorSelect();  // 追加
   initSizeSlider();
 
   // 初期キャッシュ読込
